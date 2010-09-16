@@ -18,6 +18,12 @@ header h1
 	background-color:#ffffff;
 }
 
+header h1 img
+{
+	padding:10px;
+	padding-top:20px;
+}
+
 nav#main_navigation
 {
 	clear:both;
@@ -168,11 +174,157 @@ ul#banners
 	background-color:#00baf2;
 }
 
+ul#banners li img
+{
+	border:1px solid #000000;
+}
 
+ul#banners li
+{
+	position:relative;
+}
 
+ul#banners li h2
+{
+	padding:20px;
+	padding-top:10px;
+	padding-bottom:10px;
+	font-size:28px;
+	letter-spacing:-1px;
+	font-weight:bold;
+	color:#ffffff;
+	position:absolute;
+	left:0px;
+	bottom:50px;
+	background-color:rgba(0, 0, 0, 0.75);
+	text-shadow:1px 1px 0px #000000;
+}
 
+ul#banners li p
+{
+	font-size:14px;
+	background-color:rgba(0, 0, 0, 0.75);
+	width:200px;
+}
 
+section#main_content
+{
+	margin-top:20px;
+	margin-bottom:20px;
+	width:610px;
+	float:left;
+	color:#ffffff;
+}
 
+aside#supplementary
+{
+	margin-top:20px;
+	float:right;
+	width:310px;
+}
+
+aside#supplementary div.callout
+{
+	padding:20px;
+	background-color:#2a2a2a;
+	color:#ffffff;
+}
+
+aside#supplementary div.callout a
+{
+	color:#ffffff;
+	font-size:24px;
+	display:block;
+	font-weight:bold;
+	letter-spacing:-1px;
+	text-decoration:none;
+	padding-bottom:10px;
+}
+
+aside#supplementary div.callout a.link
+{
+	position:absolute;
+	left:20px;
+	bottom:20px;
+}
+
+aside#supplementary div.callout
+{
+	position:relative;
+}
+
+aside#supplementary div.callout p
+{
+	font-size:12px;
+	line-height:1.6em;
+}
+
+aside#supplementary div#black_card
+{
+	background-image:url(../images/static/cscs_cards.png);
+	background-position:center 90%;
+	background-repeat:no-repeat;
+	height:250px;
+}
+
+.cms_content p
+{
+	font-size:12px;
+	padding-bottom:10px;
+	line-height:1.6em;
+}
+
+.cms_content h1
+{
+	font-size:32px;
+	letter-spacing:-1px;
+	font-weight:bold;
+	margin-bottom:15px;
+	text-shadow:1px 1px 0px #000000;
+	border-bottom:1px solid #00BAF2;
+	padding-bottom:5px;
+	margin-right:-20px;
+
+}
+
+body#logistics .cms_content h1
+{
+	border-color:#D44848;
+}
+
+body#security .cms_content h1
+{
+	border-color:#B0CB2F
+}
+
+body#construction .cms_content h1
+{
+	border-color:#FBAF33;
+}
+
+body#business-admin .cms_content h1
+{
+	border-color:#055266;	
+}
+
+body#customer-service .cms_content h1
+{
+	border-color:#EB008B;	
+}
+
+.cms_content
+{
+	padding:20px;
+	background-color:#2a2a2a;
+}
+
+p#breadcrumb
+{
+	background-color:#2a2a2a;
+	padding:10px;
+	padding-left:20px;
+	margin-bottom:10px;
+}
 
 
 

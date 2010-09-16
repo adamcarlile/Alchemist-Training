@@ -21,10 +21,13 @@
 <body id="<%= @root_page.slug %>">
 <div class="wrapper">
 	<header class="clearfix">
-		<h1><a href="/" id="logo" title="Return home"><%= SITE_NAME %></a></h1>
+		<h1><a href="/" id="logo" title="Return home"><img src="/images/logo/alchemist_header.png" alt="Alchemist Training"></a></h1>
 		<%= render_global_nav %>
 		<ul id="banners">
-			<li><img src="/images/logo/alchemist_header.png" width="920" height="" /></li>
+			<li>
+				<h2>This is the header for the banner</h2>
+				<img src="/images/static/lorry.jpg" width="920" height="" />
+			</li>
 		</ul>
 	</header>
 	<section id="main_content" class="clearfix">
@@ -33,7 +36,7 @@
   			<%= yield %>
 	</section>
 	<aside id="supplementary">
-  		<%= yield :sidebar %>
+  		<%= yield :support %>
 	</section>
 	<footer>
 		<%= render_footer_nav %>

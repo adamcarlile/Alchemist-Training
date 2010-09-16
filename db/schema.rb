@@ -30,6 +30,18 @@ ActiveRecord::Schema.define(:version => 20091217135521) do
     t.string   "size"
   end
 
+  create_table "banners", :force => true do |t|
+    t.string   "name"
+    t.string   "url"
+    t.integer  "position"
+    t.string   "banner_file_name"
+    t.string   "banner_content_type"
+    t.integer  "banner_file_size"
+    t.datetime "banner_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "comments", :force => true do |t|
     t.integer  "commentable_id"
     t.string   "commentable_type"
