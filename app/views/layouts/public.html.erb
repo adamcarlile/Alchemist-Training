@@ -7,7 +7,7 @@
 <%= tag 'meta', :content => @meta_description, :name => 'description' unless @meta_description.blank? %>
 <link rel="shortcut icon" href="/cms/favicon.ico" type="image/x-icon" />
 <!-- CSS -->
-<%= stylesheet_link_tag '/cms/stylesheets/reset.css','/stylesheets/general.css' %>
+<%= stylesheet_link_tag '/cms/stylesheets/reset.css','/stylesheets/general.css','/stylesheets/spinner.css' %>
 <!--[if lte IE 8]>
 <%= stylesheet_link_tag '/cms/stylesheets/ie_all.css', :media => 'screen,projection' %>
 <%= javascript_include_tag '/cms/javascripts/html5.js' %>
@@ -16,19 +16,15 @@
 <%= stylesheet_link_tag '/cms/stylesheets/ie6.css', :media => 'screen,projection' %>
 <![endif]-->
 <%= stylesheet_link_tag '/cms/stylesheets/print.css', :media => 'print' %>
+<%= javascript_include_tag 'jquery.core', 'jquery.anythingslider', 'jquery.easing', 'application' %>
 <%= yield :head %>
 </head>
-<body id="<%= @root_page.slug %>">
+<body id="<%= @root_page.slug if @root_page %>">
 <div class="wrapper">
 	<header class="clearfix">
 		<h1><a href="/" id="logo" title="Return home"><img src="/images/logo/alchemist_header.png" alt="Alchemist Training"></a></h1>
 		<%= render_global_nav %>
-		<ul id="banners">
-			<li>
-				<h2>This is the header for the banner</h2>
-				<img src="/images/static/lorry.jpg" width="920" height="" />
-			</li>
-		</ul>
+		<%= yield(:banners) || render(:partial => 'public/shared/default_banner') %>
 	</header>
 	<section id="main_content" class="clearfix">
   			<%= render_breadcrumb %>
@@ -38,7 +34,7 @@
 	<aside id="supplementary">
   		<%= yield :support %>
 	</section>
-	<footer>
+	<footer class="styled">
 		<%= render_footer_nav %>
 	</footer>
 </div>

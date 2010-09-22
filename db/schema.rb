@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091217135521) do
+ActiveRecord::Schema.define(:version => 20100921173308) do
 
   create_table "acts_as_xapian_jobs", :force => true do |t|
     t.string  "model",    :null => false
@@ -139,6 +139,15 @@ ActiveRecord::Schema.define(:version => 20091217135521) do
     t.integer  "updated_by_id"
     t.datetime "updated_at"
     t.string   "tag_cache"
+  end
+
+  create_table "page_banners", :force => true do |t|
+    t.integer  "banner_id"
+    t.integer  "editable_id"
+    t.string   "editable_type"
+    t.integer  "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "page_version_attachments", :force => true do |t|

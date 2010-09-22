@@ -80,7 +80,7 @@ nav#main_navigation ul li#logistics a:hover
 	background-color:#eb5757
 }
 
-body#logistics ul#banners
+body#logistics div#banners, body#logistics #thumbNav
 {
 	background-color:#d44848;	
 }
@@ -97,7 +97,7 @@ nav#main_navigation ul li#security a:hover
 	background-color:#bfda3f;	
 }
 
-body#security ul#banners
+body#security div#banners, body#security #thumbNav
 {
 	background-color:#b0cb2f;
 }
@@ -109,7 +109,7 @@ nav#main_navigation ul li#construction a
 	border-right:1px solid #5a6155;
 }
 
-body#construction ul#banners
+body#construction div#banners, body#construction #thumbNav
 {
 	background-color:#fbaf33;
 }
@@ -126,7 +126,7 @@ nav#main_navigation ul li#business-admin a
 	border-right:1px solid #384a4e;
 }
 
-body#business-admin ul#banners
+body#business-admin div#banners, body#business-admin #thumbNav
 {
 	background-color:#055266;
 }
@@ -142,7 +142,7 @@ nav#main_navigation ul li#customer-service a
 	border-left:1px solid #cc9598;
 }
 
-body#customer-service ul#banners
+body#customer-service div#banners, body#customer-service #thumbNav
 {
 	background-color:#eb008b;
 }
@@ -168,23 +168,33 @@ nav#main_navigation ul li.last a
 	width:160px;
 }
 
-ul#banners
+div#banners
 {
-	padding:10px;
+	background-color:#00baf2;
+	height:270px;
+}
+
+#thumbNav
+{
 	background-color:#00baf2;
 }
 
-ul#banners li img
+#thumbNav a
 {
-	border:1px solid #000000;
+	border-color:#ffffff !important;
 }
 
-ul#banners li
+div#banners.narrow
+{
+	height:10px;
+}
+
+div#banners li
 {
 	position:relative;
 }
 
-ul#banners li h2
+div#banners li h2
 {
 	padding:20px;
 	padding-top:10px;
@@ -200,7 +210,7 @@ ul#banners li h2
 	text-shadow:1px 1px 0px #000000;
 }
 
-ul#banners li p
+div#banners li p
 {
 	font-size:14px;
 	background-color:rgba(0, 0, 0, 0.75);
@@ -221,6 +231,7 @@ aside#supplementary
 	margin-top:20px;
 	float:right;
 	width:310px;
+	margin-bottom:20px;
 }
 
 aside#supplementary div.callout
@@ -287,30 +298,66 @@ aside#supplementary div#black_card
 
 }
 
-body#logistics .cms_content h1
+a
+{
+	color:#00BAF2;
+}
+
+body#logistics .cms_content h1, body#logistics .styled, body#logistics a
 {
 	border-color:#D44848;
+	color:#D44848;
+}
+
+body#logistics .cms_content h1
+{
+	color:#ffffff;
+}
+
+body#security .cms_content h1, body#security .styled, body#security a
+{
+	border-color:#B0CB2F;
+	color:#B0CB2F;
 }
 
 body#security .cms_content h1
 {
-	border-color:#B0CB2F
+	color:#ffffff;
+}
+
+body#construction .cms_content h1, body#construction .styled, body#construction a
+{
+	border-color:#FBAF33;
+	color:#FBAF33;
 }
 
 body#construction .cms_content h1
 {
-	border-color:#FBAF33;
+	color:#ffffff;
+}
+
+body#business-admin .cms_content h1, body#business-admin .styled, body#business-admin a
+{
+	border-color:#055266;
+	color:#055266;	
 }
 
 body#business-admin .cms_content h1
 {
-	border-color:#055266;	
+	color:#ffffff;
+}
+
+body#customer-service .cms_content h1, body#customer-service .styled, body#customer-service a
+{
+	border-color:#EB008B;	
+	color:#EB008B;		
 }
 
 body#customer-service .cms_content h1
 {
-	border-color:#EB008B;	
+	color:#ffffff;
 }
+
 
 .cms_content
 {
@@ -326,6 +373,12 @@ p#breadcrumb
 	margin-bottom:10px;
 }
 
+footer
+{
+	clear:both;
+	border-top:1px solid #00baf2;
+	padding-top:20px;
+}
 
 
 

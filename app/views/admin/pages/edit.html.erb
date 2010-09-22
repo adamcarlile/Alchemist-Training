@@ -1,0 +1,287 @@
+<% content_for :head do %>
+<script type="text/javascript" >
+callout_sort_path = '<%= sort_admin_page_page_banners_path(@page) %>'
+</script>
+<style>
+div.panel
+{
+	border:1px solid #EEEEEE;
+	background-color:#FAFAFA;
+	border-radius:10px;
+	-webkit-border-radius:10px;
+	-moz-border-radius:10px;
+	padding:20px;
+	margin-top:5px;
+	margin-bottom:5px;
+}
+
+div.panel h3
+{
+	margin:0px;
+	padding:0px;
+	margin-bottom:10px;
+}
+
+ul.control
+{
+	list-style:none;
+	margin:0px;
+	padding:0px;
+	float:right;
+	border-left:1px solid #EEEEEE;
+	margin-left:20px;
+	margin-bottom:20px;
+}
+
+ul.control li
+{
+	border-left:1px solid #ffffff;
+	padding-left:10px;
+	padding-top:5px;
+	padding-bottom:5px;
+}
+
+ul.callouts
+{
+	margin:0px;
+	padding:0px;
+}
+
+ul.callouts > li
+{
+	margin:0px;
+	padding:0px;
+	padding:10px;
+	background-color:#efefef;
+	margin-top:5px;
+	margin-bottom:5px;
+	border:1px solid #cccccc;
+	list-style:none;
+	float:left;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	position:relative;
+	cursor:move;
+	margin-right:10px;
+}
+
+div.inactive ul.callouts > li
+{
+	cursor:default;
+}
+
+ul.callouts div.container
+{
+	position:relative;
+	height:85px;
+}
+
+ul.callouts div.auto
+{
+	height:auto !important;
+}
+
+ul.callouts div.overlay
+{
+	position:absolute;
+	bottom:10px;
+	left:0px;
+	padding:5px;
+	font-size:10px;
+	background-color:#000000;
+	color:#ffffff;
+}
+
+ul.callouts div.overlay p
+{
+	margin:0px;
+	padding:0px;
+}
+
+ul.callouts > li > ul 
+{
+	display:none;
+	position:absolute;
+	border:1px solid #cccccc;
+	background-color:#efefef;
+	border-left:0px;
+	width:60px;
+	-moz-border-radius-topright:5px;
+	-moz-border-radius-bottomright:5px;
+	right:-71px;
+	top:17px;
+	padding:5px;
+	margin:0px;
+}
+
+ul.callouts > li:hover > ul
+{
+	display:block;
+	z-index:9000;
+}
+
+ul.callouts > li > ul > li
+{
+	padding:0px;
+	margin:0px;
+	list-style:none;
+	font-size:12px;
+}
+
+ul.callouts li form
+{
+	padding:0px;
+	margin:0px;
+	padding-top:4px;
+}
+
+ul.callouts li form label
+{
+	font-weight:normal !important;
+	padding-left:2px;
+}
+
+div.active, div.inactive
+{
+	padding:10px;
+	width:46%;
+	float:left;
+	padding-bottom:10px;
+	border:1px solid #cccccc;
+}
+
+div.active > h4, div.inactive > h4
+{
+	margin-top:-10px;
+	margin-left:-10px;
+	margin-right:-10px;
+	padding:10px;
+	margin-bottom:10px;
+	text-shadow: 1px 1px 0px #fff;
+	background-color:#cccccc;
+}
+
+div.inactive
+{
+	margin-left:20px;
+}
+
+div.inactive > ul > li
+{
+	opacity: 0.5;
+}
+
+div.inactive ul li:hover
+{
+	opacity: 1.0;
+}
+
+</style>
+<% end %>
+
+<%= admin_page_breadcrumbs %>
+
+<div class="ui-tabs ajax">
+	<ul>
+		<li><a href="#edit">Edit</a></li>
+		<% if @page.can_have_children? %>
+		<li><a href="<%= children_admin_page_path(@page) %>" title="Children">Child pages</a></li>
+		<% end %>
+		<li><a href="#status">Status (<%= @page.state.to_s.humanize %>)</a></li>
+		<% if @page.visitable? %>
+		<li><a href="<%= admin_page_attachments_path(@page, :version => params[:version]) %>" title="Attachments">Attachments</a></li>
+		<% end %>
+		<li><a href="<%= admin_page_versions_path(@page) %>" title="History">History</a></li>
+		<% if @page.can_have_user_permissions? and current_user.admin? %>
+		<li><a href="<%= admin_page_user_page_permissions_path(@page) %>" title="Permissions">User permissions</a></li>
+		<% end %>
+		<% if @page.can_have_banners? and current_user.admin? %>
+		<li><a href="<%= admin_page_page_banners_path(@page)%>" title="Banners">Banners</a></li>
+		<% end %>
+	</ul>
+
+	<div id="edit">
+
+    <% update_form do |f| %>
+      <%= render 'form', :f => f %>
+    <% end %>
+
+	</div>
+	
+	<div id="status">
+    <% form_tag fire_event_admin_page_path(@page), :method => :put do %>
+      <fieldset>
+        <legend>Status</legend>
+        <p>
+          Current status: <strong><%= @page.state.humanize.downcase %></strong>, 
+          Visible on site? <strong><%= @page.visible_on_site? ? 'Yes' : 'No' %></strong>
+        </p>
+        <p>
+          <label for="event">Action</label><br />
+          <%= select_tag :event, options_for_select(@page.state_events_for_user(current_user).map{|s| [s.to_s.humanize,s]}) %>
+        </p>
+        <p id="user_field">
+          <label for="comment">Assign to</label><br />
+          <% 
+          editor_users = @page.users_who_can_publish
+          contributor_users = @page.contributors - editor_users
+          contributor_user_options = options_for_select(contributor_users.map{|u| ["#{u.name} (contributor)", u.id] })
+          editor_user_options = options_for_select(editor_users.map{|u| ["#{u.name} (editor)", u.id] })
+           %>
+          <%= select_tag :user_id, '<option></option>' + contributor_user_options + editor_user_options %>
+        </p>
+        <p>
+          <label for="comment">Comment</label><br />
+          <%= text_area_tag :comment, '', :cols => 60, :rows => 2 %>
+        </p>
+        <p>
+          <input type="submit" value="GO" />
+        </p>
+      </fieldset>
+    <% end %>
+
+    <table class="index">
+      <tr>
+        <th>Date</th>
+        <th>By</th>
+        <th>Assigned to</th>
+        <th>Event</th>
+        <th>Status</th>
+        <th>Comment</th>
+      </tr>
+      <% for publishable_event in @page.publishable_events %>
+      <tr>
+        <td><%= format_date publishable_event.created_at %></td>
+        <td><%= publishable_event.user.name if publishable_event.user %></td>
+        <td><%= publishable_event.assigned_user.name if publishable_event.assigned_user %></td>
+        <td><%= publishable_event.event_name %></td>
+        <td><%= publishable_event.from_state %> &rarr; <%= publishable_event.to_state %></td>
+        <td><%= publishable_event.comment %></td>
+      </tr>
+      <% end %>
+    </table>
+
+    <fieldset>
+      <legend>Info</legend>
+      <p>
+        <strong>Created</strong> <%= format_date @page.created_at %>
+        <% if @page.created_by %>by <%= @page.created_by.name %><% end %>
+      </p>
+      <p>
+        <strong>Last updated</strong> <%= format_date @page.updated_at %>
+        <% if @page.updated_by %>by <%= @page.updated_by.name %><% end %>
+      </p>
+      
+      <p><strong>Currently published version:</strong> <%= @page.version %></p>
+      <p><strong>Latest version:</strong> <%= @page.latest_version.version %></p>
+      <% if @page.has_unpublished_changes? %>
+        <p>Has unpublished changes</p>
+      <% else %>
+        <p>No unpublished changes</p>
+      <% end %>
+    </fieldset>
+  </div>
+	
+</div>
+
+<div id="new_page_dialog" class="dialog" title="Create a new page"></div>

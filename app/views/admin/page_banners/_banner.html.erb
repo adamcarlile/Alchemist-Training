@@ -1,0 +1,34 @@
+<% unless active %>
+<li>
+	<div class="container auto">
+		<div class="overlay">
+			<h4><%= truncate(banner.name, :length => 30) %></h4>
+			<small><%= truncate(banner.url, :length => 30) %></small>
+		</div>
+			<%= image_tag banner.banner.url(:admin_thumb) %>
+	</div>
+	<ul>
+		<li>
+			<% create_form do |f| %>				
+				<%= f.hidden_field :banner_id, :value => banner.id %>
+				<%= f.submit 'Activate' %>
+			<% end %>
+		</li>
+	</ul>
+</li>
+<% else %>
+<li id="page_banner_<%= banner.id %>">
+	<div class="container auto">
+		<div class="overlay">
+			<h4><%= truncate(banner.banner.name, :length => 30) %></h4>
+			<small><%= truncate(banner.banner.url, :length => 30) %></small>
+		</div>
+			<%= image_tag banner.banner.banner.url(:admin_thumb) %>
+	</div>
+	<ul>
+		<li>
+      <%= link_to "#{icon('delete')} Delete", object_path(banner), :method => :delete, :confirm => 'Are you sure?' %>
+		</li>
+	</ul>
+</li>
+<% end %>

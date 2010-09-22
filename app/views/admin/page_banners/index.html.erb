@@ -1,0 +1,14 @@
+<div style="overflow:hidden">
+	<div class="active">
+		<h4>Active Banners</h4>
+		<ul class="callouts">
+			<%= render :partial => 'banner', :collection => @active, :locals => {:active => true} %>
+		</ul>
+	</div>
+	<div class="inactive">
+		<h4>Available Banners</h4>
+		<ul class="callouts">
+			<%= render :partial => 'banner', :collection => @available, :locals => {:active => false} %>
+		</ul>
+	</div>
+</div>
